@@ -1,3 +1,4 @@
+package com.bankaccount.accounts;
 import java.util.Scanner;
 
 public class Main {
@@ -5,11 +6,11 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Bem-vindo ao Banco J");
+System.out.println("Bem-vindo ao Banco J");
         System.out.print("Digite o tipo da conta (corrente/poupanca): ");
         String tipo = scanner.nextLine().toLowerCase();
 
-        Conta conta = null;
+        Account conta = null;
 
         if (tipo.equals("corrente")) {
             conta = criarContaCorrente(scanner);
@@ -63,7 +64,7 @@ public class Main {
     }
 
     // Método para executar o menu
-    private static void executarMenu(Scanner scanner, Conta conta) {
+    private static void executarMenu(Scanner scanner, Account conta) {
         int opcao;
         do {
             System.out.println("\n--- MENU ---");

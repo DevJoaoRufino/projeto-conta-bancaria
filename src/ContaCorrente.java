@@ -1,4 +1,5 @@
-public class ContaCorrente extends Conta {
+package com.bankaccount.accounts;
+public class ContaCorrente extends Account {
     private double chequeEspecial;
 
     public ContaCorrente(String agencia, String numero, String titular, double saldo, double chequeEspecial) {

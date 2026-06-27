@@ -1,4 +1,5 @@
-public class ContaPoupanca extends Conta {
+package com.bankaccount.accounts;
+public class ContaPoupanca extends Account {
     private double taxaRendimento;
 
     public ContaPoupanca(String agencia, String numero, String titular, double saldo, double taxaRendimento) {

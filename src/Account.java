@@ -1,10 +1,11 @@
-public abstract class Conta {
+package com.bankaccount.accounts;
+public abstract class Account {
     protected String agencia;
     protected String numero;
     protected String titular;
     protected double saldo;
 
-    public Conta(String agencia, String numero, String titular, double saldo) {
+    public Account(String agencia, String numero, String titular, double saldo) {
         this.agencia = agencia;
         this.numero = numero;
         this.titular = titular;
