@@ -1,4 +1,5 @@
 package com.bankaccount.accounts;
+
 import java.util.Scanner;
 
 public class Main {
@@ -6,101 +7,101 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-System.out.println("Bem-vindo ao Banco J");
+System.out.println("Bem-vindo ao Banco JF");
         System.out.print("Digite o tipo da conta (corrente/poupanca): ");
-        String tipo = scanner.nextLine().toLowerCase();
+        String type = scanner.nextLine().toLowerCase();
 
-        Account conta = null;
+        Account account = null;
 
-        if (tipo.equals("corrente")) {
-            conta = criarContaCorrente(scanner);
-        } else if (tipo.equals("poupanca")) {
-            conta = criarContaPoupanca(scanner);
+        if (type.equals("corrente")) {
+            account = createCheckingAccount(scanner);
+        } else if (type.equals("poupanca")) {
+            account = createSavingsAccount(scanner);
         } else {
             System.out.println("Tipo de conta inválido.");
         }
 
-        if (conta != null) {
-            executarMenu(scanner, conta);
+        if (account != null) {
+            runMenu(scanner, account);
         }
 
         scanner.close();
     }
 
     // Método para criar conta corrente
-    private static ContaCorrente criarContaCorrente(Scanner scanner) {
+    private static CheckingAccount createCheckingAccount(Scanner scanner) {
         System.out.print("Agência: ");
-        String agencia = scanner.nextLine();
+        String agency = scanner.nextLine();
         System.out.print("Número da conta: ");
-        String numero = scanner.nextLine();
+        String number = scanner.nextLine();
         System.out.print("Titular: ");
-        String titular = scanner.nextLine();
+        String holder  = scanner.nextLine();
         System.out.print("Saldo inicial: ");
-        double saldo = scanner.nextDouble();
+        double balance = scanner.nextDouble();
         scanner.nextLine(); // consome o Enter
         System.out.print("Cheque especial: ");
-        double chequeEspecial = scanner.nextDouble();
+        double overdraft = scanner.nextDouble();
         scanner.nextLine(); // consome o Enter
 
-        return new ContaCorrente(agencia, numero, titular, saldo, chequeEspecial);
+        return new CheckingAccount(agency, number, holder, balance, overdraft);
     }
 
     // Método para criar conta poupança
-    private static ContaPoupanca criarContaPoupanca(Scanner scanner) {
+    private static SavingsAccount createSavingsAccount(Scanner scanner) {
         System.out.print("Agência: ");
-        String agencia = scanner.nextLine();
+        String agency = scanner.nextLine();
         System.out.print("Número da conta: ");
-        String numero = scanner.nextLine();
+        String number = scanner.nextLine();
         System.out.print("Titular: ");
-        String titular = scanner.nextLine();
+        String holder = scanner.nextLine();
         System.out.print("Saldo inicial: ");
-        double saldo = scanner.nextDouble();
+        double balance = scanner.nextDouble();
         scanner.nextLine(); // consome o Enter
         System.out.print("Taxa de rendimento (ex: 0.05 para 5%): ");
-        double taxa = scanner.nextDouble();
+        double interestRate = scanner.nextDouble();
         scanner.nextLine(); // consome o Enter
 
-        return new ContaPoupanca(agencia, numero, titular, saldo, taxa);
+        return new SavingsAccount(agency, number, holder, balance, interestRate);
     }
 
     // Método para executar o menu
-    private static void executarMenu(Scanner scanner, Account conta) {
-        int opcao;
+    private static void runMenu(Scanner scanner, Account account) {
+        int option;
         do {
             System.out.println("\n--- MENU ---");
             System.out.println("1 - Consultar Saldo");
             System.out.println("2 - Depositar");
             System.out.println("3 - Sacar");
             System.out.println("4 - Transferir");
-            if (conta instanceof ContaPoupanca) {
+            if (account instanceof SavingsAccount) {
                 System.out.println("5 - Aplicar Rendimento");
             }
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
-            opcao = scanner.nextInt();
+            option = scanner.nextInt();
 
-            switch (opcao) {
+            switch (option) {
                 case 1:
-                    System.out.println(conta.consultarSaldo());
+                    System.out.println(account.checkBalance());
                     break;
                 case 2:
                     System.out.print("Valor do depósito: ");
-                    double dep = scanner.nextDouble();
-                    conta.depositar(dep);
+                    double depositAmount = scanner.nextDouble();
+                    account.deposit(depositAmount);
                     break;
                 case 3:
                     System.out.print("Valor do saque: ");
-                    double saque = scanner.nextDouble();
-                    conta.sacar(saque);
+                    double withdrawAmount = scanner.nextDouble();
+                    account.withdraw(withdrawAmount);
                     break;
                 case 4:
                     System.out.print("Valor da transferência: ");
-                    double transf = scanner.nextDouble();
-                    conta.transferir(transf);
+                    double transferAmount = scanner.nextDouble();
+                    account.transfer(transferAmount);
                     break;
                 case 5:
-                    if (conta instanceof ContaPoupanca) {
-                        ((ContaPoupanca) conta).aplicarRendimento();
+                    if (account instanceof SavingsAccount) {
+                        ((SavingsAccount) account).applyInterest();
                     }
                     break;
                 case 0:
@@ -109,6 +110,6 @@ System.out.println("Bem-vindo ao Banco J");
                 default:
                     System.out.println("Opção inválida.");
             }
-        } while (opcao != 0);
+        } while (option != 0);
     }
 }

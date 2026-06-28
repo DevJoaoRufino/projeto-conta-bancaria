@@ -1,30 +1,30 @@
 package com.bankaccount.accounts;
 public abstract class Account {
-    protected String agencia;
-    protected String numero;
-    protected String titular;
-    protected double saldo;
+    protected String agency;
+    protected String number;
+    protected String holder;
+    protected double balance;
 
-    public Account(String agencia, String numero, String titular, double saldo) {
-        this.agencia = agencia;
-        this.numero = numero;
-        this.titular = titular;
-        this.saldo = saldo;
+    public Account(String agency, String number, String holder, double balance) {
+        this.agency = agency;
+        this.number = number;
+        this.holder = holder;
+        this.balance = balance;
     }
 
-    public String consultarSaldo() {
-        return "Saldo atual: R$ " + String.format("%.2f", saldo);
+    public String checkBalance() {
+        return "Saldo atual: R$ " + String.format("%.2f", balance);
     }
 
-    public void depositar(double valor) {
-        if (valor > 0) {
-            saldo += valor;
-            System.out.println("Depósito de R$ " + valor + " realizado com sucesso!");
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Depósito de R$ " + amount + " realizado com sucesso!");
         } else {
             System.out.println("Valor inválido para depósito.");
         }
     }
 
-    public abstract void sacar(double valor);
-    public abstract void transferir(double valor);
+    public abstract void withdraw(double amount);
+    public abstract void transfer(double amount);
 }
